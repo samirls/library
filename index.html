@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>Library</title>
+</head>
+<body>
+    <header>
+        <div>My Library</div>
+        <div class="headerRight">
+            <div class="addBook"><img title="add book" id="addBook" src="./img/add.png" /></div>
+            <div class="dayNight"><img title="day/night" id="dayNight" src="./img/weather-night.png" /></div>
+        </div>
+    </header>
+    <main>
+        <div class="fullscreen-container" style="display: none;">
+            <div class="pop-up">
+                <form action="/script.js" id="book-form">
+                    <span id="close-page"><img src="./img/close.png" alt="close page button"></span>
+                    <div id="titleAddNew">Add New Book</div>
+                    <div class="input-field">
+                        <label for="book-name">Title</label>
+
+                        <input type="text" name="book-name" id="book-name" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="book-author">Author</label>
+                        <input type="text" name="book-author" id="book-author" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="pages">Number of pages</label>
+                        <input type="number" name="pages" id="pages" required>
+                    </div>
+                    <div class="input-field">
+                            <label for="read">Have you read this book?</label>
+                            <label><input id="readYes" type="radio" name="readYesNo" required>Yes</label>
+                            <label><input id="readNo" type="radio" name="readYesNo" required>No</label>
+                    </div>
+                    <div id="addBookDiv"><button type="submit" id="submit-btn">Add</button></div>
+                </form>
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>Made by samirls</div>
+        <div id="footerDiv">
+            <div>Acess my GitHub here</div>
+            <a target="_blank" href="https://github.com/samirls/" ><img src="./img/github.png"/></a>
+        </div>
+    </footer>
+    
+</body>
+
+</html>
