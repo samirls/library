@@ -81,12 +81,3 @@ function Book(title, author, pages, read) {
         return (title + author + pages + read);
     }
 }
-
-const addBookToLibrary = () => {
-    let title = $titleInput.value;
-    let author = $authorInput.value;
-    let pages = $pagesInput.value;
-    let read = getReadValue();
-    let newBook = new Book(title, author, pages, read);
-    myLibrary.push(newBook);
-  }
