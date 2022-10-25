@@ -86,6 +86,7 @@ header {
 .addBook img{
     width: auto;
     height: 50px;
+    border-radius: 50px;
 }
 
 #book-form {

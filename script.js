@@ -1,15 +1,21 @@
-
 //Open and close "pop up"
 const popupScreen = document.querySelector(".fullscreen-container");
+const buttonElement = document.querySelector('.addBook');
+const closePopUpElement = document.querySelector('#close-page');
 
-    const buttonElement = document.querySelector('.addBook');
-    buttonElement.addEventListener('click', ()=>{
-        popupScreen.setAttribute('style',"display:flex")  
-    })
-    const closePopUpElement = document.querySelector('#close-page');
-    closePopUpElement.addEventListener('click', ()=>{
+buttonElement.addEventListener('click', ()=>{
+    popupScreen.setAttribute('style',"display:flex")  
+    });
+
+closePopUpElement.addEventListener('click', ()=>{
         popupScreen.setAttribute('style',"display: none")
-    })
+    });
+
+document.addEventListener("click", (e) => {
+        if (e.target == popupScreen) {
+          popupScreen.style.display = "none";
+        }
+      });
 
         
 //Toggle day/night/cloud mode
@@ -60,8 +66,6 @@ function changeColor() {
 }
 
 
-
-
 //Code for library
 
 //Library
@@ -72,22 +76,17 @@ function Book(title, author, pages, read) {
     this.title = title,
     this.author = author,
     this.pages = pages,
-    this.read = read
+    this.read = read,
     this.info = function() {
         return (title + author + pages + read);
     }
 }
 
-//form functionality
-let bookId = 0;
-const formElement = document.querySelector('#book-form');
-
-
-
-
-
-
-/*function addBookToLibrary(title, author, pages, read) {
-    let book = new Book(title, author, pages, read);
-    myLibrary.push(book);
-} */
+const addBookToLibrary = () => {
+    let title = $titleInput.value;
+    let author = $authorInput.value;
+    let pages = $pagesInput.value;
+    let read = getReadValue();
+    let newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+  }
