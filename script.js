@@ -29,6 +29,7 @@ function night() {
     document.body.style.color = "#00A170";
     document.getElementById("dayNight").src = "./img/sunAndClouds.png";
     document.getElementById("addBook").src = "./img/plusGreen.png";
+    document.getElementById("about").src = "./img/question-night.png";
     isDay = 1;
 }
 
@@ -38,6 +39,7 @@ function clouds() {
     document.body.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 #BC70A4, 0 -1px #BC70A4";
     document.getElementById("dayNight").src = "./img/sun.png";
     document.getElementById("addBook").src = "./img/plusRed.png";
+    document.getElementById("about").src = "./img/question-red.png";
     isDay = 2;
 }
 
@@ -47,6 +49,7 @@ function day() {
     document.body.style.textShadow = "none";
     document.getElementById("dayNight").src = "./img/weather-night.png";
     document.getElementById("addBook").src = "./img/add.png";
+    document.getElementById("about").src = "./img/question-day.png";
     isDay = 0;
 }
 
@@ -66,6 +69,12 @@ function changeColor() {
     }
     
 }
+
+
+//right click to add book
+window.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+    popupScreen.setAttribute('style',"display:flex")  })
 
 
 //<----------> Code for library Starts Here <-----------> stop HTML47:15 JS 53

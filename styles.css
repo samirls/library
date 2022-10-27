@@ -27,9 +27,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol, ul {
-	list-style: none;
-}
+
 blockquote, q {
 	quotes: none;
 }
@@ -83,6 +81,51 @@ header {
     height: auto;
     width: 55px;
 }
+
+#about {
+    height: auto;
+    width: 52px;
+}
+
+.about {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    border-radius: 15px;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 130px;
+    width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px;
+    z-index: 1;
+    font-size: 1.1rem;
+    text-align: justify;
+  }
+
+  ul {
+    padding-left: 5px;
+  }
+
+  li {
+    padding-left: 1px;
+  }
+
+  .about:hover .dropdown-content {
+    display: block;
+  }
+
+.dropdown-content {
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
 
 .addBook img{
     width: auto;
@@ -168,10 +211,11 @@ button:active {
 }
 
 .card.book {
-    display: grid;
+    display: grid;    
     grid-template-columns: 8fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 5px;
+    border-radius:8px;
 }
 
 .read-checked {
