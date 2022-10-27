@@ -1,4 +1,4 @@
-//Open and close "pop up"
+//Open and close "pop up" (this is called modal)
 const popupScreen = document.querySelector(".fullscreen-container");
 const buttonElement = document.querySelector('.addBook');
 const closePopUpElement = document.querySelector('#close-page');
@@ -35,6 +35,7 @@ function night() {
 function clouds() {
     document.body.style.backgroundImage = "linear-gradient(to top, #dbdcd7 0%, #dddcd7 24%, #e2c9cc 30%, #e7627d 46%, #b8235a 59%, #801357 71%, #3d1635 84%, #1c1a27 100%)";
     document.body.style.color = "#b8235a";
+    document.body.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 #BC70A4, 0 -1px #BC70A4";
     document.getElementById("dayNight").src = "./img/sun.png";
     document.getElementById("addBook").src = "./img/plusRed.png";
     isDay = 2;
@@ -67,7 +68,7 @@ function changeColor() {
 }
 
 
-//<-------------> Code for library Starts Here <--------------> stop 27:15
+//<----------> Code for library Starts Here <-----------> stop HTML47:15 JS 53
 
 //books - main div holding all the books
 const books = document.querySelector('.books');
@@ -85,6 +86,51 @@ let myLibrary = [{
     read: false,
 }
 ];
+
+
+function addLocalStorage() {
+
+    myLibrary = JSON.parse(localStorage.getItem("library")) || [];
+    saveAndRenderBooks();
+}
+
+//Add the book that are in the form 57:20
+const addBookForm = document.querySelector("#book-form")
+addBookForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    const data = new FormData(e.target);
+    let newBook = {};
+    for(let [name,value] of data) {
+        if(name === "book-read") {
+            newBook["book-read"] = true;
+        }
+        else {
+            newBook[name] = value || ""
+        }
+    }
+
+    if(!newBook["book-read"]) {
+        newBook["book-read"] = false;
+    }
+
+    addBookToLibrary(newBook["book-name"], 
+    newBook["book-author"], 
+    newBook["book-pages"], 
+    newBook["book-read"],);
+
+    addBookForm.reset();
+    popupScreen.style.display = "none";
+
+
+});
+
+
+function addBookToLibrary(title, author, pages, read) {
+    myLibrary.push(new Book(title, author, pages, read))
+    saveAndRenderBooks()
+}
+
 
 //Create elements for each book (helper function to create HTML elements
 //with text content and classes)
@@ -108,12 +154,12 @@ function createReadElement(bookItem, book) {
         if(e.target.checked) {
             bookItem.setAttribute("class", "card book read-checked")
             book.read = true;
-            renderBooks()
+            saveAndRenderBooks()
         }
         else {
             bookItem.setAttribute("class", "card book read-unchecked");
             book.read = false;
-            renderBooks();
+            saveAndRenderBooks();
         }
     })
 
@@ -137,7 +183,11 @@ function createEditIcon(book) {
     return editIcon;
 }
 
-
+function deleteBook(index) {
+    myLibrary.splice(index,1)
+    saveAndRenderBooks();
+    
+}
 
 //create divs for each new book (function to create all of the book content
 // on the book dom card)
@@ -152,7 +202,11 @@ function createBookItem (book, index) {
     bookItem.appendChild(createReadElement(bookItem, book));
     bookItem.appendChild(createBookElement("button", "X", "delete"));
     bookItem.appendChild(createEditIcon(book));
+    bookItem.querySelector(".delete").addEventListener("click", () => {
+        deleteBook(index);
+    })
     books.insertAdjacentElement("afterbegin", bookItem);
+
 
 }
 
@@ -162,6 +216,7 @@ function Book(title, author, pages, read) {
     this.author = author,
     this.pages = pages,
     this.read = read,
+    this.id = Math.floor(Math.random() * 100000);
     this.info = function() {
         return (title + author + pages + read);
     }
@@ -169,11 +224,16 @@ function Book(title, author, pages, read) {
 
 //render books (function to render all the books)
 function renderBooks() {
+    books.textContent = "";
     myLibrary.map((book,index) => {
         createBookItem(book,index)
     })
 }
 
+function saveAndRenderBooks() {
+    localStorage.setItem("library", JSON.stringify(myLibrary));
+    renderBooks();
+}
 
 //render on page load
-renderBooks();
+addLocalStorage();
