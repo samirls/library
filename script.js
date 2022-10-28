@@ -85,12 +85,12 @@ const books = document.querySelector('.books');
 //Library (array of books)
 let myLibrary = [{
     title: "Example",
-    author: "me",
+    author: "someone",
     pages: 500,
     read: true
 }, {
     title: "Example 2",
-    author: "you",
+    author: "someone else",
     pages: 100,
     read: false,
 }
@@ -184,7 +184,7 @@ function createReadElement(bookItem, book) {
 //create the edit icon w/ event listener
 function createEditIcon(book) {
     const editIcon = document.createElement("img");
-    editIcon.src = "./img/pencil-white.png";
+    //editIcon.src = "./img/pencil-white.png";
     editIcon.setAttribute("class", "edit-icon");
     editIcon.addEventListener("click", (e) => {
         console.log(book);
@@ -205,12 +205,12 @@ function createBookItem (book, index) {
     bookItem.setAttribute("id", index);
     bookItem.setAttribute("key", index);
     bookItem.setAttribute("class", "card book");
-    bookItem.appendChild(createBookElement('h1', `Title: ${book.title}`, "book-title"));
+    bookItem.appendChild(createBookElement('h1', book.title, "book-title"));
     bookItem.appendChild(createBookElement('h1', `Author: ${book.author}`, "book-author"));
     bookItem.appendChild(createBookElement('h1', `Pages: ${book.pages}`, "book-pages"));
     bookItem.appendChild(createReadElement(bookItem, book));
     bookItem.appendChild(createBookElement("button", "X", "delete"));
-    bookItem.appendChild(createEditIcon(book));
+    //bookItem.appendChild(createEditIcon(book));
     bookItem.querySelector(".delete").addEventListener("click", () => {
         deleteBook(index);
     })
